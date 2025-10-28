@@ -3,11 +3,11 @@
 from machine import Pin, I2C
 import time
 
-# ----- Configuration I2C pour le DS3231 -----
+#  Configuration I2C pour le DS3231 
 i2c = I2C(1, sda=Pin(14), scl=Pin(15))
 rtc_address = 0x68  # Adresse I2C du DS3231
 
-# ----- Fonction pour lire les secondes depuis le DS3231 -----
+#  Fonction pour lire les secondes depuis le DS3231 
 def bcd_to_int(bcd):
     """Convertit une valeur BCD en entier"""
     return ((bcd >> 4) * 10) + (bcd & 0x0F)
@@ -17,11 +17,10 @@ def read_seconds():
     raw = i2c.readfrom_mem(rtc_address, 0x00, 1)
     return bcd_to_int(raw[0])
 
-# ----- Bouton pour le jeu -----
-# ✅ Pull-down = bon choix puisque le bouton est relié à 3.3 V
+#  Bouton pour le jeu 
 button = Pin(22, Pin.IN, Pin.PULL_DOWN)
 
-# ----- Ouverture du fichier journal -----
+# Ouverture du fichier journal 
 log = open("log.txt", "a")
 
 try:
@@ -70,3 +69,4 @@ except KeyboardInterrupt:
 finally:
     log.close()
     print("Journal sauvegarder dans log.txt")
+
