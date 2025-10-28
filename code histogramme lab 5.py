@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-# ----- Lire le fichier log.txt -----
+#  Lire le fichier log.txt 
 temps = []
 
 with open("log.txt", "r") as f:
@@ -13,10 +13,11 @@ with open("log.txt", "r") as f:
             value = int(rtc_part.split()[1])  # récupère le nombre 14
             temps.append(value)
 
-# ----- Créer un histogramme -----
+# Créer un histogramme 
 plt.hist(temps, bins=range(min(temps), max(temps)+2), edgecolor='black', align='left')
 plt.xlabel("Temps compté par le joueur (secondes)")
 plt.ylabel("Nombre d'essais")
 plt.title("Précision de la perception du temps")
 plt.xticks(range(min(temps), max(temps)+1))
 plt.show()
+
